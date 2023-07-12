@@ -4,7 +4,7 @@ import { Statistics } from "./Statistics";
 import { Notification } from "./Notification";
 import { Component } from "react";
 
-class Feedback extends Component{
+class App extends Component{
  state = {
   good: 0,
   neutral: 0,
@@ -13,8 +13,9 @@ class Feedback extends Component{
   
   updateFeedback = evt => {
     const option = evt.target.textContent;
-    this.setState({ [option]: this.state[option] + 1 })
+    this.setState(prev => { return { [option]: prev[option] + 1 } } )
   }
+  
   countTotalFeedback = () => {
    return  Object.values(this.state).reduce((total, value) => {return total + value}, 0)
   }
@@ -45,6 +46,4 @@ class Feedback extends Component{
     )
   }
 }
-export const App = () => {
-   return(<Feedback/>)
- }
+export default App;
