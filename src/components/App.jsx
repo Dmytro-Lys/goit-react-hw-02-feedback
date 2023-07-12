@@ -9,9 +9,10 @@ class Feedback extends Component{
   good: 0,
   neutral: 0,
   bad: 0
-}
+  }
+  
   updateFeedback = evt => {
-    const option = evt.target.textContent.toLowerCase();
+    const option = evt.target.textContent;
     this.setState({ [option]: this.state[option] + 1 })
   }
   countTotalFeedback = () => {
@@ -25,19 +26,19 @@ class Feedback extends Component{
     return (
       <>
       <Section title="Please leave feedback">
-        <FeedbackOptions onLeaveFeedback={this.updateFeedback} />
+          <FeedbackOptions options={this.state} onLeaveFeedback={this.updateFeedback} />
+      </Section>
+      { this.countTotalFeedback() ?
+        <Section title="Statistics">
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={this.countTotalFeedback()}
+            positiveFeedbackPercentage={this.countPositiveFeedbackPercentage()}
+          />
         </Section>
-        { this.countTotalFeedback() ?
-          <Section title="Statistics">
-            <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={this.countTotalFeedback()}
-              positiveFeedbackPercentage={this.countPositiveFeedbackPercentage()}
-            />
-          </Section>
-        :
+       :
         <Notification message="There is no feedback"/>
         }
       </>
