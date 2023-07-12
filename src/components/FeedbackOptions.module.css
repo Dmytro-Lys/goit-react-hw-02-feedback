@@ -1,0 +1,14 @@
+.feedback-options {
+  display: flex;
+  gap: 16px;
+}
+
+.feedback-btn {
+  cursor: pointer;
+  font-size: 24px;
+  border-radius: 5px;
+}
+
+.feedback-btn:hover {
+  background-color: aquamarine;
+}
